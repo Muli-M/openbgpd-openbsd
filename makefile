@@ -30,7 +30,7 @@ debian: makefile debian/control $(OPENBGPD_VERSION).tar.gz
 	gbp dch --ignore-branch --git-author
 	sed -i "/UNRELEASED;/s/unknown/${MULI_TAG}/" debian/changelog
 	# generate dependencies
-	dpkg-shlibdeps -ldebian/tmp/usr/local/lib debian/tmp/usr/local/lib/*.so
+	dpkg-shlibdeps -ldebian/tmp/usr/local/lib debian/tmp/usr/local/sbin/*
 	# generate symbols file
 	dpkg-gensymbols
 	# generate triggers file
