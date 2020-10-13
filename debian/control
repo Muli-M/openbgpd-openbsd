@@ -1,0 +1,14 @@
+Source: openbgpd-openbsd
+Section: net
+Priority: optional
+Maintainer: Maxim Zakharov <zakhma@muli.com.au>
+Standards-Version: 4.1.4
+
+Package: openbgpd-openbsd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Portable build of OpenBGPD.
+ See https://github.com/openbgpd-portable/openbgpd-portable
+
+
+
