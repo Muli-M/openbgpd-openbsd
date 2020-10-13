@@ -1,5 +1,5 @@
-libtls-openbsd (VERSION) UNRELEASED; urgency=medium
+openbgpd-openbsd (1.0) UNRELEASED; urgency=medium
 
   * 
 
- -- Maxim Zakharov <zakhma@muli.com.au>  Tue, 13 Oct 2020 14:23:57 +1100
+ -- Maxim Zakharov <zakhma@muli.com.au>  Tue, 13 Oct 2020 14:36:28 +1100
