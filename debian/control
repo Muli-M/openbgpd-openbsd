@@ -2,12 +2,15 @@ Source: openbgpd-openbsd
 Section: net
 Priority: optional
 Maintainer: Maxim Zakharov <zakhma@muli.com.au>
+Build-Depends: debhelper, bison, libbsd-dev
 Standards-Version: 4.1.4
 
 Package: openbgpd-openbsd
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, adduser, lsb-base
 Description: Portable build of OpenBGPD.
+ OpenBGPD is OpenBSD BGP routing daemon implementing
+ the Border Gateway Protocol, Version 4.
  See https://github.com/openbgpd-portable/openbgpd-portable
 
 
