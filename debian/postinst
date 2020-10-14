@@ -1,0 +1,8 @@
+#!/bin/sh
+PATH=/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin
+
+update-rc.d openbgpd defaults
+
+service openbgpd start
+
+exit 0

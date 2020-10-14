@@ -1,0 +1,74 @@
+#!/bin/bash
+# chkconfig: - 16 84
+# config: /usr/local/etc/bgpd.conf
+
+### BEGIN INIT INFO
+# Provides: openbgpd
+# Required-Start:    $remote_fs $syslog $network
+# Required-Stop:     $remote_fs $syslog $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: OpenBGPD routing engine
+# Description: OpenBGPD is an implementation of the Border Gateway
+#              Protocol, Version 4.
+### END INIT INFO
+
+# source function library
+. /lib/lsb/init-functions
+
+# openbgpd command line options
+. /etc/default/openbgpd
+
+RETVAL=0
+PROG="openbgpd"
+NAME="bgpd"
+cmd=/usr/local/sbin/bgpd
+LOCK_FILE=/var/lock/openbgpd
+CONF_FILE=/usr/local/etc/bgpd.conf
+PIDFILE=/var/run/$NAME.pid
+
+# if the config file doesn't exist, exit immediately
+[ -f "$CONF_FILE" ] || exit 0
+
+case "$1" in
+  start)
+	if [ `id -u` -ne 0 ]; then
+		echo $"Insufficient privilege" 1>&2
+		exit 4
+	fi
+
+	log_daemon_msg "Starting $PROG" "$PROG"
+	start_daemon -- $cmd -d $BGPD_OPTS -f $CONF_FILE
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch $LOCK_FILE
+	log_end_msg $RETVAL
+	;;
+  stop)
+	log_daemon_msg "Shutting down $PROG" "$PROG"
+	killproc -p $PIDFILE $cmd
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f $LOCK_FILE
+	log_end_msg $RETVAL
+	;;
+  restart|reload|force-reload)
+	$0 stop
+	$0 start
+	RETVAL=$?
+	;;
+  condrestart|try-restart)
+	if [ -f $LOCK_FILE ]; then
+		$0 stop
+		$0 start
+	fi
+	RETVAL=$?
+	;;
+  status)
+	status_of_proc -p $PIDFILE $cmd
+	RETVAL=$?
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|restart|reload|force-reload|condrestart|try-restart|status}"
+	exit 2
+esac
+
+exit $RETVAL

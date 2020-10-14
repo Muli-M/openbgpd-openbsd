@@ -1,0 +1,6 @@
+#!/bin/sh
+PATH=/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin
+
+service openbgpd stop
+
+update-rc.d -f openbgpd remove
