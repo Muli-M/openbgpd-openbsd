@@ -2,7 +2,7 @@
 
 set -e
 
-uid=`getent passwd bgpd | cut -d ":" -f 3`
+uid=`getent passwd _bgpd | cut -d ":" -f 3`
 
 if ! [ "$uid" ]; then
         adduser --quiet \
@@ -10,7 +10,8 @@ if ! [ "$uid" ]; then
                 --disabled-password \
                 --home /var/run \
                 --no-create-home \
-                --shell /bin/bash \
+                --shell /sbin/nologin \
                 --group \
-                bgpd
+		--force-badname \
+                _bgpd
 fi
