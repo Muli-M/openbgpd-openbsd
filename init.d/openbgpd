@@ -38,7 +38,7 @@ case "$1" in
 	fi
 
 	log_daemon_msg "Starting $PROG" "$PROG"
-	start_daemon -- $cmd -d $BGPD_OPTS -f $CONF_FILE
+	start_daemon -- $cmd $BGPD_OPTS -f $CONF_FILE
 	RETVAL=$?
 	[ $RETVAL -eq 0 ] && touch $LOCK_FILE
 	log_end_msg $RETVAL
